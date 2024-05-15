@@ -1,7 +1,12 @@
-;;; magit-file-icons.el --- Icons for file entries in Magit buffers -*- lexical-binding:t -*-
+;;; magit-file-icons.el --- Icons for file entries in Magit buffers -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2024 Gregor Grigorjan
+
+;; Author: Gregor Grigorjan <gregor@grigorjan.net>
+;; Created: 14 May 2024
 
 ;; URL: https://github.com/gekoke/magit-file-icons
-;; Package-Version: 0.2.2
+;; Package-Version: 0.2.3
 ;; Package-Requires: ((emacs "24.3") (magit "3.3.0") (nerd-icons "0.1.0") (el-patch "3.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
