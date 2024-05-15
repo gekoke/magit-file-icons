@@ -33,9 +33,9 @@ For example, with [straight.el](https://github.com/radian-software/straight.el):
 
 If you are using some other method to install, you will need to ensure the following dependencies:
 
-- el-patch
-- nerd-icons
-- magit
+- `el-patch`
+- `nerd-icons`
+- `magit`
 
 ## Nix
 
