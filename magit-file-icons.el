@@ -45,6 +45,11 @@
   :type 'boolean
   :group 'magit-file-icons)
 
+(defcustom magit-file-icons-enable-diffstat-icons t
+  "Enable icons in revision diffstats."
+  :type 'boolean
+  :group 'magit-file-icons)
+
 (el-patch-define-template
  (defun magit-diff-insert-file-section)
  (format (el-patch-swap "%-10s %s" "%-10s %s %s") status (el-patch-add (nerd-icons-icon-for-file (or orig file)))
@@ -56,11 +61,18 @@
  (defun magit-insert-untracked-files)
  (insert (propertize (el-patch-swap file (format "%s %s" (nerd-icons-icon-for-file file) file)) 'font-lock-face 'magit-filename) ?\n))
 
+(el-patch-define-template
+ (defun magit-diff-wash-diffstat)
+ (insert (propertize (el-patch-swap file (format "%s %s" (nerd-icons-icon-for-file file) file)) 'font-lock-face 'magit-filename)
+         sep cnt " "))
+
 (defvar patched-functions '()
   "The Magit functions to should be patched.")
 
 (when magit-file-icons-enable-diff-file-section-icons (push 'magit-diff-insert-file-section patched-functions))
 (when magit-file-icons-enable-untracked-icons (push 'magit-insert-untracked-files patched-functions))
+(when magit-file-icons-enable-diffstat-icons (push 'magit-diff-wash-diffstat patched-functions))
+
 ;;;###autoload
 (define-minor-mode magit-file-icons-mode
   "Prefix files with icons in Magit buffers."
@@ -74,7 +86,6 @@
     (dolist (func patched-functions)
       (el-patch-unpatch func 'defun nil))
     (magit-refresh))))
-
 
 (provide 'magit-file-icons)
 
