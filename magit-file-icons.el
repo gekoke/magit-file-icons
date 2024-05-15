@@ -40,6 +40,11 @@
   :type 'boolean
   :group 'magit-file-icons)
 
+(defcustom magit-file-icons-enable-untracked-icons t
+  "Enable icons prefixing untracked files."
+  :type 'boolean
+  :group 'magit-file-icons)
+
 (el-patch-define-template
  (defun magit-diff-insert-file-section)
  (format (el-patch-swap "%-10s %s" "%-10s %s %s") status (el-patch-add (nerd-icons-icon-for-file (or orig file)))
@@ -47,10 +52,15 @@
              file
            (format (el-patch-swap "%s -> %s" "%s -> %s %s") orig (el-patch-add (nerd-icons-icon-for-file file)) file))))
 
+(el-patch-define-template
+ (defun magit-insert-untracked-files)
+ (insert (propertize (el-patch-swap file (format "%s %s" (nerd-icons-icon-for-file file) file)) 'font-lock-face 'magit-filename) ?\n))
+
 (defvar patched-functions '()
   "The Magit functions to should be patched.")
 
 (when magit-file-icons-enable-diff-file-section-icons (push 'magit-diff-insert-file-section patched-functions))
+(when magit-file-icons-enable-untracked-icons (push 'magit-insert-untracked-files patched-functions))
 ;;;###autoload
 (define-minor-mode magit-file-icons-mode
   "Prefix files with icons in Magit buffers."
