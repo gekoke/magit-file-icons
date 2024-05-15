@@ -39,22 +39,22 @@ If you are using some other method to install, you will need to ensure the follo
 
 ## Nix
 
-Alternatively, you can use Nix. This repository is a flake and outputs the following packages:
+Alternatively, you can use Nix. This repository is a flake and outputs the following packages (versions omitted):
 
 ```
 └───packages
     ├───aarch64-darwin
-    │   ├───default: package 'emacs-magit-file-icons-v0.0.1'
-    │   └───magit-file-icons: package 'emacs-magit-file-icons-v0.0.1'
+    │   ├───default: package 'emacs-magit-file-icons-vX.X.X'
+    │   └───magit-file-icons: package 'emacs-magit-file-icons-vX.X.X'
     ├───aarch64-linux
-    │   ├───default: package 'emacs-magit-file-icons-v0.0.1'
-    │   └───magit-file-icons: package 'emacs-magit-file-icons-v0.0.1'
+    │   ├───default: package 'emacs-magit-file-icons-vX.X.X'
+    │   └───magit-file-icons: package 'emacs-magit-file-icons-vX.X.X'
     ├───x86_64-darwin
-    │   ├───default: package 'emacs-magit-file-icons-v0.0.1'
-    │   └───magit-file-icons: package 'emacs-magit-file-icons-v0.0.1'
+    │   ├───default: package 'emacs-magit-file-icons-vX.X.X'
+    │   └───magit-file-icons: package 'emacs-magit-file-icons-vX.X.X'
     └───x86_64-linux
-        ├───default: package 'emacs-magit-file-icons-v0.0.1'
-        └───magit-file-icons: package 'emacs-magit-file-icons-v0.0.1'
+        ├───default: package 'emacs-magit-file-icons-vX.X.X'
+        └───magit-file-icons: package 'emacs-magit-file-icons-vX.X.X'
 ```
 
 A minimal flake for creating an Emacs with the `magit-file-icons` package could look like this:
