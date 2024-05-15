@@ -1,6 +1,8 @@
-;;; validate-templates.el --- Make sure the el-patch templates are valid  -*- lexical-binding: t; -*-
+;;; magit-file-icons-tests.el --- Tests for the magit-file-icons package -*- lexical-binding: t; -*-
 
-;; Author: Gregor Grigorjan <gregor@grigorjan.net>
+;; Copyright (C) 2024  
+
+;; Author: ;; Gregor Grigorjan <gregor@grigorjan.net>
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -16,6 +18,14 @@
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
+
+;; Currently, just checks if el-patch templates are valid
+;; with the `el-patch-validate-all-templates' function.
+;; This function doesn't actually error if there are invalid templates,
+;; it just prints informational messages.
+
+;; flycheck-disabled-checkers: (emacs-lisp emacs-lisp-checkdoc)
+;; End:
 
 ;;; Code:
 
