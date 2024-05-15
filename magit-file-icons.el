@@ -67,7 +67,7 @@
          sep cnt " "))
 
 (defvar patched-functions '()
-  "The Magit functions to should be patched.")
+  "The Magit functions that should be patched.")
 
 (when magit-file-icons-enable-diff-file-section-icons (add-to-list 'patched-functions 'magit-diff-insert-file-section))
 (when magit-file-icons-enable-untracked-icons (add-to-list 'patched-functions 'magit-insert-untracked-files))
