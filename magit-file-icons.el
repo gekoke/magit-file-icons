@@ -69,9 +69,9 @@
 (defvar patched-functions '()
   "The Magit functions that should be patched.")
 
-(when magit-file-icons-enable-diff-file-section-icons (add-to-list 'patched-functions 'magit-diff-insert-file-section))
-(when magit-file-icons-enable-untracked-icons (add-to-list 'patched-functions 'magit-insert-untracked-files))
-(when magit-file-icons-enable-diffstat-icons (add-to-list 'patched-functions 'magit-diff-wash-diffstat))
+(when magit-file-icons-enable-diff-file-section-icons (add-to-list 'patched-functions #'magit-diff-insert-file-section))
+(when magit-file-icons-enable-untracked-icons (add-to-list 'patched-functions #'magit-insert-untracked-files))
+(when magit-file-icons-enable-diffstat-icons (add-to-list 'patched-functions #'magit-diff-wash-diffstat))
 
 ;;;###autoload
 (define-minor-mode magit-file-icons-mode
