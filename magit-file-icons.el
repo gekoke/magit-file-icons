@@ -1,6 +1,6 @@
 ;;; magit-file-icons.el --- Icons for file entries in Magit buffers -*- lexical-binding:t -*-
 
-
+;; URL: https://github.com/gekoke/magit-file-icons
 ;; Package-Version: 0.1.0
 ;; Package-Requires: ((emacs "24.3") (magit "3.3.0") (nerd-icons "0.1.0") (el-patch "3.1"))
 
