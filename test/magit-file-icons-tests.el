@@ -23,6 +23,3 @@
 
 (el-patch-validate-all-templates)
 
-(provide 'magit-file-icons-tests)
-
-;;; magit-file-icons-tests.el ends here
