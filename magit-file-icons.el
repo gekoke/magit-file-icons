@@ -66,25 +66,20 @@
  (insert (propertize (el-patch-swap file (format "%s %s" (nerd-icons-icon-for-file file) file)) 'font-lock-face 'magit-filename)
          sep cnt " "))
 
-(defvar patched-functions '()
-  "The Magit functions that should be patched.")
-
-(when magit-file-icons-enable-diff-file-section-icons (add-to-list 'patched-functions #'magit-diff-insert-file-section))
-(when magit-file-icons-enable-untracked-icons (add-to-list 'patched-functions #'magit-insert-untracked-files))
-(when magit-file-icons-enable-diffstat-icons (add-to-list 'patched-functions #'magit-diff-wash-diffstat))
-
 ;;;###autoload
 (define-minor-mode magit-file-icons-mode
   "Prefix files with icons in Magit buffers."
   :after-hook
   (cond
    (magit-file-icons-mode
-    (dolist (func patched-functions)
-      (el-patch-eval-template func 'defun))
+    (when magit-file-icons-enable-diff-file-section-icons (el-patch-eval-template #'magit-diff-insert-file-section 'defun))
+    (when magit-file-icons-enable-untracked-icons (el-patch-eval-template #'magit-insert-untracked-files 'defun))
+    (when magit-file-icons-enable-diffstat-icons (el-patch-eval-template #'magit-diff-wash-diffstat 'defun))
     (magit-refresh))
    ('deactivate
-    (dolist (func patched-functions)
-      (el-patch-unpatch func 'defun nil))
+    (el-patch-unpatch #'magit-diff-insert-file-section 'defun nil)
+    (el-patch-unpatch #'magit-insert-untracked-files 'defun nil)
+    (el-patch-unpatch #'magit-diff-wash-diffstat 'defun nil)
     (magit-refresh))))
 
 (provide 'magit-file-icons)
