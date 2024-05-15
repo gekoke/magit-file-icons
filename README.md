@@ -81,7 +81,7 @@ A minimal flake for creating an Emacs with the `magit-file-icons` package could 
 }
 ```
 
-## Commentary
+# Commentary
 
 This package uses [nerd-icons.el](https://github.com/rainstormstudio/nerd-icons.el) to render icons. Currently, this is the
 only supported icon backend.
