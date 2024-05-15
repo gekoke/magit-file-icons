@@ -4,7 +4,7 @@
     <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png" width="800px"/>
 </h1>
 
-Display file icons in ![Magit](https://github.com/magit/magit)!
+Display icons for filenames in ![Magit](https://github.com/magit/magit) buffers!
 
 <img src="https://img.shields.io/github/actions/workflow/status/gekoke/magit-file-icons/ci.yaml?style=for-the-badge"/>
 
