@@ -32,6 +32,10 @@ _: {
                 exit 1
             fi
           '';
+
+          meta = {
+            license = lib.licenses.gpl3;
+          };
         };
       };
     };
