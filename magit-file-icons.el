@@ -59,7 +59,7 @@
 
 (el-patch-define-template
  (defun magit-insert-untracked-files)
- (insert (propertize (el-patch-swap file (format "%s %s" (nerd-icons-icon-for-file file) file)) 'font-lock-face 'magit-filename) ?\n))
+ (insert (propertize (el-patch-swap file (format "%s %s" (if (file-directory-p file) (nerd-icons-icon-for-dir file) (nerd-icons-icon-for-file file)) file)) 'font-lock-face 'magit-filename) ?\n))
 
 (el-patch-define-template
  (defun magit-diff-wash-diffstat)
