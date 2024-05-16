@@ -25,12 +25,8 @@ _: {
           ] ++ packageRequires;
 
           checkPhase = ''
-            output=$(emacs --batch -L . -L test -l magit-file-icons-tests 2> >(grep invalid))
-            if [[ $output ]]; then
-                echo "Failed to validate templates. Output:"
-                echo "$output"
-                exit 1
-            fi
+            git init # need to be in repository for Magit tests to not fail
+            emacs --batch -l ert -l magit-file-icons.el -l ./test/magit-file-icons-tests.el -f ert-run-tests-batch-and-exit
           '';
 
           meta = {
