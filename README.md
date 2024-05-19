@@ -6,7 +6,11 @@
 
 Display icons for filenames in ![Magit](https://github.com/magit/magit) buffers!
 
-<img src="https://img.shields.io/github/actions/workflow/status/gekoke/magit-file-icons/ci.yaml?style=for-the-badge"/>
+<div>
+    <a href="https://github.com/gekoke/magit-file-icons/actions"><img src="https://img.shields.io/github/actions/workflow/status/gekoke/magit-file-icons/ci.yaml?style=for-the-badge" alt="Build status"/></a>
+    <a href="https://github.com/gekoke/magit-file-icons/releases/latest"><img src="https://img.shields.io/github/v/tag/gekoke/magit-file-icons.svg?label=release&sort=semver&color=blue&style=for-the-badge" alt="Version"/></a>
+    <a href="https://opensource.org/license/gpl-3-0"><img src="https://img.shields.io/badge/license-GPLv3-orange.svg?style=for-the-badge" alt="License"></a>
+</div>
 
 # Preview
 ![Magit status buffer with file icons](./screenshots/status.png)
@@ -14,14 +18,13 @@ Display icons for filenames in ![Magit](https://github.com/magit/magit) buffers!
 ![Magit revision diffstat with file icons](./screenshots/diffstat.png)
 
 # Installation
+You can install this package from [MELPA](https://melpa.org/#/magit-file-icons).
 
-This package is not yet in any package archives. To install, you need to fetch the source.
-
-For example, with [straight.el](https://github.com/radian-software/straight.el):
+For example, with `use-package`:
 
 ```elisp
 (use-package magit-file-icons
-  :straight (:host github :repo "gekoke/magit-file-icons")
+  :ensure t
   :custom
   ;; These are the default values:
   (magit-file-icons-enable-diff-file-section-icons t)
