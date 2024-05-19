@@ -6,7 +6,7 @@
 ;; Created: 14 May 2024
 
 ;; URL: https://github.com/gekoke/magit-file-icons
-;; Package-Version: 0.2.3
+;; Package-Version: 0.2.5
 ;; Package-Requires: ((emacs "24.3") (magit "3.3.0") (nerd-icons "0.1.0") (el-patch "3.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -64,7 +64,16 @@
 
 (el-patch-define-template
  (defun magit-insert-untracked-files)
- (insert (propertize (el-patch-swap file (format "%s %s" (if (file-directory-p file) (nerd-icons-icon-for-dir file) (nerd-icons-icon-for-file file)) file)) 'font-lock-face 'magit-filename) ?\n))
+ (insert
+  (propertize
+   (el-patch-swap file
+                  (format "%s %s"
+                          (if (file-directory-p file)
+                              (nerd-icons-icon-for-dir file)
+                            (nerd-icons-icon-for-file file))
+                          file))
+   'font-lock-face 'magit-filename)
+  ?\n))
 
 (el-patch-define-template
  (defun magit-diff-wash-diffstat)
