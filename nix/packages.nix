@@ -14,6 +14,7 @@ _: {
           packageRequires = [
             pkgs.emacsPackages.el-patch
             pkgs.emacsPackages.nerd-icons
+            pkgs.emacsPackages.magit
           ];
 
           doCheck = true;
@@ -21,12 +22,12 @@ _: {
           nativeCheckInputs = [
             pkgs.git
             pkgs.emacs
-            pkgs.emacsPackages.magit
           ] ++ packageRequires;
 
           checkPhase = ''
-            git init # need to be in repository for Magit tests to not fail
             emacs --batch -l ert -l magit-file-icons.el -l ./test/magit-file-icons-tests.el -f ert-run-tests-batch-and-exit
+            git init
+            emacs --batch -l ert -l magit-file-icons.el -l ./test/magit-file-icons-git-repo-tests.el -f ert-run-tests-batch-and-exit
           '';
 
           meta = {
