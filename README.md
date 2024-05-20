@@ -38,7 +38,6 @@ If you are using some other method to install, you will need to ensure the follo
 
 - `el-patch`
 - `nerd-icons`
-- `magit`
 
 ## Nix
 

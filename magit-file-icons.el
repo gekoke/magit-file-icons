@@ -7,7 +7,7 @@
 
 ;; URL: https://github.com/gekoke/magit-file-icons
 ;; Package-Version: 1.0.0
-;; Package-Requires: ((emacs "24.3") (magit "3.3.0") (nerd-icons "0.1.0") (el-patch "3.1"))
+;; Package-Requires: ((emacs "24.3") (nerd-icons "0.1.0") (el-patch "3.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -88,13 +88,11 @@
    (magit-file-icons-mode
     (when magit-file-icons-enable-diff-file-section-icons (el-patch-eval-template #'magit-diff-insert-file-section 'defun))
     (when magit-file-icons-enable-untracked-icons (el-patch-eval-template #'magit-insert-untracked-files 'defun))
-    (when magit-file-icons-enable-diffstat-icons (el-patch-eval-template #'magit-diff-wash-diffstat 'defun))
-    (magit-refresh))
+    (when magit-file-icons-enable-diffstat-icons (el-patch-eval-template #'magit-diff-wash-diffstat 'defun)))
    ('deactivate
     (el-patch-unpatch #'magit-diff-insert-file-section 'defun nil)
     (el-patch-unpatch #'magit-insert-untracked-files 'defun nil)
-    (el-patch-unpatch #'magit-diff-wash-diffstat 'defun nil)
-    (magit-refresh))))
+    (el-patch-unpatch #'magit-diff-wash-diffstat 'defun nil))))
 
 (provide 'magit-file-icons)
 
