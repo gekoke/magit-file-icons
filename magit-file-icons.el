@@ -7,7 +7,7 @@
 
 ;; URL: https://github.com/gekoke/magit-file-icons
 ;; Package-Version: 1.0.0
-;; Package-Requires: ((emacs "24.3") (nerd-icons "0.1.0") (el-patch "3.1"))
+;; Package-Requires: ((emacs "24.3") (magit "3.3.0") (nerd-icons "0.1.0") (el-patch "3.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
