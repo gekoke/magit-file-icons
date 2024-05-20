@@ -25,13 +25,13 @@ For example, with `use-package`:
 ```elisp
 (use-package magit-file-icons
   :ensure t
+  :init
+  (magit-file-icons-mode 1)
   :custom
   ;; These are the default values:
   (magit-file-icons-enable-diff-file-section-icons t)
   (magit-file-icons-enable-untracked-icons t)
-  (magit-file-icons-enable-diffstat-icons t)
-  :config
-  (magit-file-icons-mode 1))
+  (magit-file-icons-enable-diffstat-icons t))
 ```
 
 If you are using some other method to install, you will need to ensure the following dependencies:
