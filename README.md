@@ -34,6 +34,9 @@ For example, with `use-package`:
   (magit-file-icons-enable-diffstat-icons t))
 ```
 
+> [!TIP]
+> You needn't worry about what order to load `magit-file-icons` in relation to `magit`, as it already loads `magit` for you. 
+
 If you are using some other method to install, you will need to ensure the following dependencies:
 
 - `el-patch`
