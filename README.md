@@ -25,6 +25,7 @@ For example, with `use-package`:
 ```elisp
 (use-package magit-file-icons
   :ensure t
+  :after magit
   :init
   (magit-file-icons-mode 1)
   :custom
