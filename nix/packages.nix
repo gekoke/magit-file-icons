@@ -1,3 +1,4 @@
+# TODO add optional argument specifying icon backend (nerd-icons or all-the-icons) and modify packageRequires accordingly
 _: {
   perSystem =
     { lib, pkgs, ... }:
