@@ -56,7 +56,9 @@
   :group 'magit-file-icons)
 
 (defcustom magit-file-icons-icon-backend 'nerd-icons
-  "Icon backend for magit-file-icons."
+  "Icon backend for magit-file-icons. Set this to nil
+if you want to customize `magit-file-icons-icon-for-file-func'
+or `magit-file-icons-icon-for-dir-func'."
   :type 'symbol
   :group 'magit-file-icons)
 
@@ -66,25 +68,36 @@
                                         (setq magit-file-icons-icon-backend 'all-the-icons))))
 
 (defcustom magit-file-icons-icon-for-file-func nil
-  "Icon for file function."
+  "Icon for file function. Automatically set if
+`magit-file-icons-icon-backend' is non-nil.
+Customize using (fset 'magit-file-icons-icon-for-file-func 'custom-function)."
   :type 'symbol
   :group 'magit-file-icons)
 
 (defcustom magit-file-icons-icon-for-dir-func nil
-  "Icon for directory function."
+  "Icon for directory function. Automatically set if
+`magit-file-icons-icon-backend' is non-nil.
+Customize using (fset 'magit-file-icons-icon-for-file-func 'custom-function)."
   :type 'symbol
   :group 'magit-file-icons)
 
-(if (eq magit-file-icons-icon-backend 'nerd-icons)
-    (funcall (lambda ()
-               (fset 'magit-file-icons-icon-for-file-func 'nerd-icons-icon-for-file)
-               (fset 'magit-file-icons-icon-for-dir-func 'nerd-icons-icon-for-dir)))
-    (funcall (lambda ()
-               (fset 'magit-file-icons-icon-for-file-func 'all-the-icons-icon-for-file)
-               (fset 'magit-file-icons-icon-for-dir-func 'all-the-icons-icon-for-dir))))
+(defun magit-file-icons-refresh-backend ()
+  "Refresh backend according to `magit-file-icons-icon-backend'.
+Does not refresh if `magit-file-icons-icon-backend' is nil."
+  (if magit-file-icons-icon-backend
+  (if (eq magit-file-icons-icon-backend 'nerd-icons)
+      (funcall (lambda ()
+                 (fset 'magit-file-icons-icon-for-file-func 'nerd-icons-icon-for-file)
+                 (fset 'magit-file-icons-icon-for-dir-func 'nerd-icons-icon-for-dir)))
+      (funcall (lambda ()
+                 (fset 'magit-file-icons-icon-for-file-func 'all-the-icons-icon-for-file)
+                 (fset 'magit-file-icons-icon-for-dir-func 'all-the-icons-icon-for-dir))))))
+
+(magit-file-icons-refresh-backend)
 
 (el-patch-define-template
  (defun magit-diff-insert-file-section)
+ (magit-file-icons-refresh-backend)
  (format (el-patch-swap "%-10s %s" "%-10s %s %s") status (el-patch-add (magit-file-icons-icon-for-file-func (or orig file)))
          (if (or (not orig) (equal orig file))
              file
@@ -92,6 +105,7 @@
 
 (el-patch-define-template
  (defun magit-insert-untracked-files)
+ (magit-file-icons-refresh-backend)
  (insert
   (propertize
    (el-patch-swap file
@@ -105,6 +119,7 @@
 
 (el-patch-define-template
  (defun magit-diff-wash-diffstat)
+ (magit-file-icons-refresh-backend)
  (insert (propertize (el-patch-swap file (format "%s %s" (magit-file-icons-icon-for-file-func file) file)) 'font-lock-face 'magit-filename)
          sep cnt " "))
 
