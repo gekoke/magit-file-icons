@@ -26,14 +26,14 @@
 
 ;; Places icons next to file entries in Magit buffers based on file extension.
 ;; This is intended to improve visual clarity and ease of gleaning information.
-;; Currently, only the `nerd-icons' backend is supported.
+;; Currently, the `nerd-icons' backend is the default, but it will fallback
+;; to `all-the-icons' if nerd-icons is not found.
 
 ;;; Code:
 
 (require 'el-patch)
 (require 'el-patch-template)
 (require 'magit)
-(require 'nerd-icons)
 
 (defgroup magit-file-icons nil
   "Show file icons in Magit buffers."
@@ -55,12 +55,40 @@
   :type 'boolean
   :group 'magit-file-icons)
 
+(defcustom magit-file-icons-icon-backend 'nerd-icons
+  "Icon backend for magit-file-icons."
+  :type 'symbol
+  :group 'magit-file-icons)
+
+(if (not (require 'nerd-icons nil t)) (funcall
+                                       (lambda ()
+                                        (require 'all-the-icons)
+                                        (setq magit-file-icons-icon-backend 'all-the-icons))))
+
+(defcustom magit-file-icons-icon-for-file-func nil
+  "Icon for file function."
+  :type 'symbol
+  :group 'magit-file-icons)
+
+(defcustom magit-file-icons-icon-for-dir-func nil
+  "Icon for directory function."
+  :type 'symbol
+  :group 'magit-file-icons)
+
+(if (eq magit-file-icons-icon-backend 'nerd-icons)
+    (funcall (lambda ()
+               (fset 'magit-file-icons-icon-for-file-func 'nerd-icons-icon-for-file)
+               (fset 'magit-file-icons-icon-for-dir-func 'nerd-icons-icon-for-dir)))
+    (funcall (lambda ()
+               (fset 'magit-file-icons-icon-for-file-func 'all-the-icons-icon-for-file)
+               (fset 'magit-file-icons-icon-for-dir-func 'all-the-icons-icon-for-dir))))
+
 (el-patch-define-template
  (defun magit-diff-insert-file-section)
- (format (el-patch-swap "%-10s %s" "%-10s %s %s") status (el-patch-add (nerd-icons-icon-for-file (or orig file)))
+ (format (el-patch-swap "%-10s %s" "%-10s %s %s") status (el-patch-add (magit-file-icons-icon-for-file-func (or orig file)))
          (if (or (not orig) (equal orig file))
              file
-           (format (el-patch-swap "%s -> %s" "%s -> %s %s") orig (el-patch-add (nerd-icons-icon-for-file file)) file))))
+           (format (el-patch-swap "%s -> %s" "%s -> %s %s") orig (el-patch-add (magit-file-icons-icon-for-file-func file)) file))))
 
 (el-patch-define-template
  (defun magit-insert-untracked-files)
@@ -69,15 +97,15 @@
    (el-patch-swap file
                   (format "%s %s"
                           (if (file-directory-p file)
-                              (nerd-icons-icon-for-dir file)
-                            (nerd-icons-icon-for-file file))
+                              (magit-file-icons-icon-for-dir-func file)
+                            (magit-file-icons-icon-for-file-func file))
                           file))
    'font-lock-face 'magit-filename)
   ?\n))
 
 (el-patch-define-template
  (defun magit-diff-wash-diffstat)
- (insert (propertize (el-patch-swap file (format "%s %s" (nerd-icons-icon-for-file file) file)) 'font-lock-face 'magit-filename)
+ (insert (propertize (el-patch-swap file (format "%s %s" (magit-file-icons-icon-for-file-func file) file)) 'font-lock-face 'magit-filename)
          sep cnt " "))
 
 ;;;###autoload
