@@ -38,7 +38,7 @@ For example, with `use-package`:
 If you are using some other method to install, you will need to ensure the following dependencies:
 
 - `el-patch`
-- `nerd-icons`
+- `nerd-icons` or `all-the-icons`
 - `magit`
 
 ## Nix
@@ -87,9 +87,7 @@ A minimal flake for creating an Emacs with the `magit-file-icons` package could 
 
 # Commentary
 
-This package uses [nerd-icons.el](https://github.com/rainstormstudio/nerd-icons.el) to render icons. Currently, this is the
-only supported icon backend.
+This package uses [nerd-icons.el](https://github.com/rainstormstudio/nerd-icons.el) by default to render icons, but if nerd-icons is not found, it will attempt to use [all-the-icons.el](https://github.com/domtronn/all-the-icons.el) instead. Currently, these are the only supported backends.
 
-The author is not opposed to adding additional icon backends — such as [all-the-icons.el](https://github.com/domtronn/all-the-icons.el)
-or [vscode-icons-emacs](https://github.com/jojojames/vscode-icon-emacs) — in the future.
+The author is not opposed to adding additional icon backends — such as [vscode-icons-emacs](https://github.com/jojojames/vscode-icon-emacs) — in the future.
 
