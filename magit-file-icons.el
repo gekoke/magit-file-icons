@@ -97,7 +97,6 @@ Does not refresh if `magit-file-icons-icon-backend' is nil."
 
 (el-patch-define-template
  (defun magit-diff-insert-file-section)
- (magit-file-icons-refresh-backend)
  (format (el-patch-swap "%-10s %s" "%-10s %s %s") status (el-patch-add (magit-file-icons-icon-for-file-func (or orig file)))
          (if (or (not orig) (equal orig file))
              file
@@ -105,7 +104,6 @@ Does not refresh if `magit-file-icons-icon-backend' is nil."
 
 (el-patch-define-template
  (defun magit-insert-untracked-files)
- (magit-file-icons-refresh-backend)
  (insert
   (propertize
    (el-patch-swap file
@@ -119,7 +117,6 @@ Does not refresh if `magit-file-icons-icon-backend' is nil."
 
 (el-patch-define-template
  (defun magit-diff-wash-diffstat)
- (magit-file-icons-refresh-backend)
  (insert (propertize (el-patch-swap file (format "%s %s" (magit-file-icons-icon-for-file-func file) file)) 'font-lock-face 'magit-filename)
          sep cnt " "))
 
@@ -131,11 +128,17 @@ Does not refresh if `magit-file-icons-icon-backend' is nil."
    (magit-file-icons-mode
     (when magit-file-icons-enable-diff-file-section-icons (el-patch-eval-template #'magit-diff-insert-file-section 'defun))
     (when magit-file-icons-enable-untracked-icons (el-patch-eval-template #'magit-insert-untracked-files 'defun))
-    (when magit-file-icons-enable-diffstat-icons (el-patch-eval-template #'magit-diff-wash-diffstat 'defun)))
+    (when magit-file-icons-enable-diffstat-icons (el-patch-eval-template #'magit-diff-wash-diffstat 'defun))
+    (when magit-file-icons-enable-diff-file-section-icons (magit-file-icons-refresh-backend))
+    (when magit-file-icons-enable-untracked-icons (magit-file-icons-refresh-backend))
+    (when magit-file-icons-enable-diffstat-icons (magit-file-icons-refresh-backend)))
+    (add-hook 'magit-mode-hook 'magit-file-icons-refresh-backend)
    ('deactivate
     (el-patch-unpatch #'magit-diff-insert-file-section 'defun nil)
     (el-patch-unpatch #'magit-insert-untracked-files 'defun nil)
-    (el-patch-unpatch #'magit-diff-wash-diffstat 'defun nil))))
+    (el-patch-unpatch #'magit-diff-wash-diffstat 'defun nil)))
+    (remove-hook 'magit-mode-hook 'magit-file-icons-refresh-backend))
+
 
 (provide 'magit-file-icons)
 
