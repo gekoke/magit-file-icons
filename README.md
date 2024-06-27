@@ -75,11 +75,12 @@ A minimal flake for creating an Emacs with the `magit-file-icons` package could 
   outputs =
     inputs:
     let
-      pkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
+      system = "x86_64-linux";
+      pkgs = inputs.nixpkgs.legacyPackages.${system};
     in
     {
-      packages."x86_64-linux".default = pkgs.emacsWithPackages (p: [
-        inputs.magit-file-icons.packages."x86_64-linux".default
+      packages.${system}.default = pkgs.emacsWithPackages (_: [
+        inputs.magit-file-icons.packages.${system}.default
       ]);
     };
 }
