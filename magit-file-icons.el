@@ -63,7 +63,7 @@
            (format (el-patch-swap "%s -> %s" "%s -> %s %s") orig (el-patch-add (nerd-icons-icon-for-file file)) file))))
 
 (el-patch-define-template
- (defun magit-insert-untracked-files)
+ (defun magit-insert-files-1)
  (insert
   (propertize
    (el-patch-swap file
@@ -87,11 +87,11 @@
   (cond
    (magit-file-icons-mode
     (when magit-file-icons-enable-diff-file-section-icons (el-patch-eval-template #'magit-diff-insert-file-section 'defun))
-    (when magit-file-icons-enable-untracked-icons (el-patch-eval-template #'magit-insert-untracked-files 'defun))
+    (when magit-file-icons-enable-untracked-icons (el-patch-eval-template #'magit-insert-files-1 'defun))
     (when magit-file-icons-enable-diffstat-icons (el-patch-eval-template #'magit-diff-wash-diffstat 'defun)))
    ('deactivate
     (el-patch-unpatch #'magit-diff-insert-file-section 'defun nil)
-    (el-patch-unpatch #'magit-insert-untracked-files 'defun nil)
+    (el-patch-unpatch #'magit-insert-files-1 'defun nil)
     (el-patch-unpatch #'magit-diff-wash-diffstat 'defun nil))))
 
 (provide 'magit-file-icons)
