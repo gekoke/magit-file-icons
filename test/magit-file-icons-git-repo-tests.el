@@ -3,6 +3,7 @@
 (require 'ert)
 (require 'el-patch)
 (require 'magit-file-icons)
+(require 'nerd-icons)
 
 (ert-deftest magit-file-icons-test-can-open-magit-status-buffer-while-in-minor-mode ()
   (magit-file-icons-mode +1)
