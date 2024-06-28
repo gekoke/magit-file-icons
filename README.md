@@ -27,6 +27,7 @@ For example, with `use-package`:
   :ensure t
   :after magit
   :init
+  (require 'nerd-icons)
   (magit-file-icons-mode 1)
   :custom
   ;; These are the default values:
@@ -38,12 +39,12 @@ For example, with `use-package`:
 If you are using some other method to install, you will need to ensure the following dependencies:
 
 - `el-patch`
-- `nerd-icons`
 - `magit`
+- Your own icons backend (i.e: `nerd-icons` or `all-the-icons`)
 
 ## Nix
 
-Alternatively, you can use Nix. This repository is a flake and outputs the following packages (versions omitted):
+Alternatively, you can use Nix. Currently, this will install it with the `nerd-icons` backend. This repository is a flake and outputs the following packages (versions omitted):
 
 ```
 └───packages
@@ -88,9 +89,12 @@ A minimal flake for creating an Emacs with the `magit-file-icons` package could 
 
 # Commentary
 
-This package uses [nerd-icons.el](https://github.com/rainstormstudio/nerd-icons.el) to render icons. Currently, this is the
-only supported icon backend.
-
-The author is not opposed to adding additional icon backends — such as [all-the-icons.el](https://github.com/domtronn/all-the-icons.el)
-or [vscode-icons-emacs](https://github.com/jojojames/vscode-icon-emacs) — in the future.
-
+This package by default uses [nerd-icons.el](https://github.com/rainstormstudio/nerd-icons.el) to render icons. A custom icon backend can 
+be used by customizing the `magit-file-icons-icon-for-file-func` and `magit-file-icons-icon-for-dir-func`. A minimal config for [all-the-icons](https://github.com/domtronn/all-the-icons.el) would include:
+```elisp
+(require 'all-the-icons)
+(require 'magit-file-icons)
+(setq magit-file-icons-icon-for-file-func 'all-the-icons-icon-for-file)
+(setq magit-file-icons-icon-for-dir-func 'all-the-icons-icon-for-dir)
+(magit-file-icons-mode 1)
+```
