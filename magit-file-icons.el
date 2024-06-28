@@ -26,7 +26,10 @@
 
 ;; Places icons next to file entries in Magit buffers based on file extension.
 ;; This is intended to improve visual clarity and ease of gleaning information.
-;; Currently, only the `nerd-icons' backend is supported.
+;; Currently, the `nerd-icons' backend is supported by default if loaded, but
+;; a custom backend (`all-the-icons' or `vscode-icons' for example) can be
+;; used by customizing `magit-file-icons-icon-for-file-func' and
+;; `magit-file-icons-icon-for-dir-func'.
 
 ;;; Code:
 
