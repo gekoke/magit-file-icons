@@ -33,7 +33,6 @@
 (require 'el-patch)
 (require 'el-patch-template)
 (require 'magit)
-(require 'nerd-icons)
 
 (defgroup magit-file-icons nil
   "Show file icons in Magit buffers."
@@ -55,12 +54,26 @@
   :type 'boolean
   :group 'magit-file-icons)
 
+(defcustom magit-file-icons-icon-for-file-func 'nerd-icons-icon-for-file
+  "Function to create an icon from a file.
+Set to `nerd-icons-icon-for-file' if using nerd-icons
+and `all-the-icons-icon-for-file' if using all-the-icons."
+  :type 'function
+  :group 'magit-file-icons)
+
+(defcustom magit-file-icons-icon-for-dir-func 'nerd-icons-icon-for-dir
+  "Function to create an icon from a file.
+Set to `nerd-icons-icon-for-dir' if using nerd-icons
+and `all-the-icons-icon-for-dir' if using all-the-icons."
+  :type 'function
+  :group 'magit-file-icons)
+
 (el-patch-define-template
  (defun magit-diff-insert-file-section)
- (format (el-patch-swap "%-10s %s" "%-10s %s %s") status (el-patch-add (nerd-icons-icon-for-file (or orig file)))
+ (format (el-patch-swap "%-10s %s" "%-10s %s %s") status (el-patch-add (funcall magit-file-icons-icon-for-file-func (or orig file)))
          (if (or (not orig) (equal orig file))
              file
-           (format (el-patch-swap "%s -> %s" "%s -> %s %s") orig (el-patch-add (nerd-icons-icon-for-file file)) file))))
+           (format (el-patch-swap "%s -> %s" "%s -> %s %s") orig (el-patch-add (funcall magit-file-icons-icon-for-file-func file)) file))))
 
 (el-patch-define-template
  (defun magit-insert-files-1)
@@ -69,15 +82,15 @@
    (el-patch-swap file
                   (format "%s %s"
                           (if (file-directory-p file)
-                              (nerd-icons-icon-for-dir file)
-                            (nerd-icons-icon-for-file file))
+                              (funcall magit-file-icons-icon-for-dir-func file)
+                            (funcall magit-file-icons-icon-for-file-func file))
                           file))
    'font-lock-face 'magit-filename)
   ?\n))
 
 (el-patch-define-template
  (defun magit-diff-wash-diffstat)
- (insert (propertize (el-patch-swap file (format "%s %s" (nerd-icons-icon-for-file file) file)) 'font-lock-face 'magit-filename)
+ (insert (propertize (el-patch-swap file (format "%s %s" (funcall magit-file-icons-icon-for-file-func file) file)) 'font-lock-face 'magit-filename)
          sep cnt " "))
 
 ;;;###autoload
