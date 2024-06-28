@@ -1,4 +1,3 @@
-
 <h1 align="center">
     magit-file-icons.el
     <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png" width="800px"/>
@@ -13,11 +12,13 @@ Display icons for filenames in ![Magit](https://github.com/magit/magit) buffers!
 </div>
 
 # Preview
+
 ![Magit status buffer with file icons](./screenshots/status.png)
 
 ![Magit revision diffstat with file icons](./screenshots/diffstat.png)
 
 # Installation
+
 You can install this package from [MELPA](https://melpa.org/#/magit-file-icons).
 
 For example, with `use-package`:
@@ -26,7 +27,7 @@ For example, with `use-package`:
 (use-package magit-file-icons
   :ensure t
   :after magit
-  :init
+  :config
   (magit-file-icons-mode 1)
   :custom
   ;; These are the default values:
