@@ -41,6 +41,8 @@ If you are using some other method to install, you will need to ensure the follo
 - `nerd-icons`
 - `magit`
 
+**Note**: Even if you get those dependencies automatically, you will still need to install the necessary font separately. It can be found [here](https://github.com/ryanoasis/nerd-fonts?tab=readme-ov-file#font-installation).
+
 ## Nix
 
 Alternatively, you can use Nix. This repository is a flake and outputs the following packages (versions omitted):
