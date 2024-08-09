@@ -1,4 +1,3 @@
-
 <h1 align="center">
     magit-file-icons.el
     <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png" width="800px"/>
@@ -13,11 +12,13 @@ Display icons for filenames in ![Magit](https://github.com/magit/magit) buffers!
 </div>
 
 # Preview
+
 ![Magit status buffer with file icons](./screenshots/status.png)
 
 ![Magit revision diffstat with file icons](./screenshots/diffstat.png)
 
 # Installation
+
 You can install this package from [MELPA](https://melpa.org/#/magit-file-icons).
 
 For example, with `use-package`:
@@ -45,7 +46,7 @@ If you are using some other method to install, you will need to ensure the follo
 
 Alternatively, you can use Nix. This repository is a flake and outputs the following packages (versions omitted):
 
-```
+```text
 └───packages
     ├───aarch64-darwin
     │   ├───default: package 'emacs-magit-file-icons-vX.X.X'
