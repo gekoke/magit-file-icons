@@ -7,7 +7,7 @@ _: {
 
         magit-file-icons = pkgs.emacsPackages.trivialBuild rec {
           pname = "magit-file-icons";
-          version = "v2.0.0";
+          version = "v3.0.0";
 
           src = ../.;
 
