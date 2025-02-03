@@ -12,7 +12,7 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: actions/checkout@v4.1.6
+      - uses: actions/checkout@v4.1.7
       - uses: DeterminateSystems/nix-installer-action@v11
       - name: Build package
         run: nix build -L
