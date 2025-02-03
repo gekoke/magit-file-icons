@@ -7,7 +7,7 @@ _: {
 
         magit-file-icons = pkgs.emacsPackages.trivialBuild rec {
           pname = "magit-file-icons";
-          version = "v2.0.0";
+          version = "v3.0.0";
 
           src = ../.;
 
@@ -25,9 +25,9 @@ _: {
           ] ++ packageRequires;
 
           checkPhase = ''
-            emacs --batch -l ert -l magit-file-icons.el -l ./test/magit-file-icons-tests.el -f ert-run-tests-batch-and-exit
+            emacs -l package -f package-initialize --batch -l ert -l magit-file-icons.el -l ./test/magit-file-icons-tests.el -f ert-run-tests-batch-and-exit
             git init
-            emacs --batch -l ert -l magit-file-icons.el -l ./test/magit-file-icons-git-repo-tests.el -f ert-run-tests-batch-and-exit
+            emacs -l package -f package-initialize --batch -l ert -l magit-file-icons.el -l ./test/magit-file-icons-git-repo-tests.el -f ert-run-tests-batch-and-exit
           '';
 
           meta = {

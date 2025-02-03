@@ -6,8 +6,8 @@
 ;; Created: 14 May 2024
 
 ;; URL: https://github.com/gekoke/magit-file-icons
-;; Package-Version: 2.0.0
-;; Package-Requires: ((emacs "24.3") (magit "3.3.0") (nerd-icons "0.1.0") (el-patch "3.1"))
+;; Package-Version: 3.0.0
+;; Package-Requires: ((emacs "24.3") (nerd-icons "0.1.0") (el-patch "3.1"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -32,7 +32,6 @@
 
 (require 'el-patch)
 (require 'el-patch-template)
-(require 'magit)
 (require 'nerd-icons)
 
 (defgroup magit-file-icons nil
@@ -63,17 +62,10 @@
            (format (el-patch-swap "%s -> %s" "%s -> %s %s") orig (el-patch-add (nerd-icons-icon-for-file file)) file))))
 
 (el-patch-define-template
- (defun magit-insert-files-1)
- (insert
-  (propertize
-   (el-patch-swap file
-                  (format "%s %s"
-                          (if (file-directory-p file)
-                              (nerd-icons-icon-for-dir file)
-                            (nerd-icons-icon-for-file file))
-                          file))
-   'font-lock-face 'magit-filename)
-  ?\n))
+ (defun magit-insert-files)
+ (magit-insert-section (file file)
+   (insert (propertize (el-patch-swap file (concat (nerd-icons-icon-for-file file) " ")) 'font-lock-face 'magit-filename))
+   (insert ?\n)))
 
 (el-patch-define-template
  (defun magit-diff-wash-diffstat)
@@ -87,11 +79,11 @@
   (cond
    (magit-file-icons-mode
     (when magit-file-icons-enable-diff-file-section-icons (el-patch-eval-template #'magit-diff-insert-file-section 'defun))
-    (when magit-file-icons-enable-untracked-icons (el-patch-eval-template #'magit-insert-files-1 'defun))
+    (when magit-file-icons-enable-untracked-icons (el-patch-eval-template #'magit-insert-files 'defun))
     (when magit-file-icons-enable-diffstat-icons (el-patch-eval-template #'magit-diff-wash-diffstat 'defun)))
    ('deactivate
     (el-patch-unpatch #'magit-diff-insert-file-section 'defun nil)
-    (el-patch-unpatch #'magit-insert-files-1 'defun nil)
+    (el-patch-unpatch #'magit-insert-files 'defun nil)
     (el-patch-unpatch #'magit-diff-wash-diffstat 'defun nil))))
 
 (provide 'magit-file-icons)

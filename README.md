@@ -17,6 +17,15 @@ Display icons for filenames in ![Magit](https://github.com/magit/magit) buffers!
 
 ![Magit revision diffstat with file icons](./screenshots/diffstat.png)
 
+# Changelog
+
+## 3.0.0
+
+Version `3.0.0` is a breaking version bump, compatible with `magit` MELPA version `20250203` and greater.
+
+- Apply fix related to changes in Magit's internals introduced in [83d89ee](https://github.com/magit/magit/commit/83d89ee5bb1c488544bae60d52f7ee1987b6449e).
+- Drop `magit` from `Package-Requires`. Users are now expected to supply the correct `magit` package version themselves.
+
 # Installation
 You can install this package from [MELPA](https://melpa.org/#/magit-file-icons).
 
@@ -39,7 +48,6 @@ If you are using some other method to install, you will need to ensure the follo
 
 - `el-patch`
 - `nerd-icons`
-- `magit`
 
 ## Nix
 
