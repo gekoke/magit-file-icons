@@ -19,6 +19,12 @@ Display icons for filenames in ![Magit](https://github.com/magit/magit) buffers!
 
 # Changelog
 
+## 3.0.1
+
+Version `3.0.0` contained a bug, and only seemingly fixed the compatibility issue with newer Magit versions.
+
+- Remove icon functionality for untracked files. This is a temporary hack to prevent errors until a working patch can be found.
+
 ## 3.0.0
 
 Version `3.0.0` is a breaking version bump, compatible with `magit` MELPA version `20250203` and greater.
