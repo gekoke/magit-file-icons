@@ -14,7 +14,6 @@ _: {
           packageRequires = [
             pkgs.emacsPackages.el-patch
             pkgs.emacsPackages.nerd-icons
-            pkgs.emacsPackages.magit
           ];
 
           doCheck = true;
@@ -22,6 +21,7 @@ _: {
           nativeCheckInputs = [
             pkgs.git
             pkgs.emacs
+            pkgs.emacsPackages.magit
           ] ++ packageRequires;
 
           checkPhase = ''
