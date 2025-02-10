@@ -17,7 +17,7 @@ jobs:
       - name: Build package
         run: nix build -L
       - name: Release
-        uses: softprops/action-gh-release@v2.0.8
+        uses: softprops/action-gh-release@v2.2.1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: result/share/emacs/site-lisp/magit-file-icons.el
