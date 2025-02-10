@@ -1,3 +1,21 @@
+# DEPRECATED
+
+Starting from [223461b](https://github.com/magit/magit/commit/223461b52c35b0f426c053f4c6e7e7637c4a9b73), Magit natively supports custom formatting functions for file entries through the [`magit-format-file-function`](https://github.com/magit/magit/commit/223461b52c35b0f426c053f4c6e7e7637c4a9b73#diff-335d97ddde0824a60d53f17c711216f33e2a27860169fc2e02763781e2ae4779R328) customizable variable. It also ships with pre-defined formatting functions for both `nerd-icons` and `all-the-icons` - rendering this package effectively obsolete.
+
+Users are encouraged to update `magit` to the latest version and make use of its built-in formatting facilities:
+
+```elisp
+(use-package nerd-icons
+  :ensure t)
+
+(use-package magit
+  :ensure t
+  :after nerd-icons
+  :custom
+  (magit-format-file-function #'magit-format-file-nerd-icons))
+```
+
+Thank you, Jonas Bernoulli, for your continued improvements to our favorite Git client!
 
 <h1 align="center">
     magit-file-icons.el
